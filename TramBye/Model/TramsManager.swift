@@ -6,9 +6,11 @@
 //
 
 import Foundation
+import CoreLocation
+import MapKit
 
 struct TramsManager {
-    let tramsURL = "https://api.um.warszawa.pl/api/action/busestrams_get/?resource_id=%20f2e5503e-%20927d-4ad3-9500-4ab9e55deb59&apikey=\(apiKeyTram)&type=2&line=7"
+    let tramsURL = "https://api.um.warszawa.pl/api/action/busestrams_get/?resource_id=%20f2e5503e-%20927d-4ad3-9500-4ab9e55deb59&apikey=\(apiKeyTram)&type=2&line=20"
     
     func fetchTramLineLocation(tramLine: String) {
         let urlString = "\(tramsURL)=\(tramLine)#"
@@ -42,8 +44,17 @@ struct TramsManager {
         let decoder = JSONDecoder()
         do {
             let decodedData = try decoder.decode(Result.self, from: tramsData)
-            print(decodedData.result[0].Lines)
-            print(decodedData.result.count)
+            let numberOfTrams = decodedData.result.count
+            
+            for (index, element) in decodedData.result.enumerated() {
+                //print(index, ":", element)
+               
+                places.append(TramsData(Lat: decodedData.result[index].Lat, Lon: decodedData.result[index].Lon, Lines: decodedData.result[index].Lines))
+                
+                
+               
+            }
+            
         } catch {
             print(error)
         }

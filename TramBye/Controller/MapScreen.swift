@@ -9,9 +9,10 @@ import UIKit
 import MapKit
 import CoreLocation
 
+var places: [TramsData] = []
 
 class MapScreenViewController: UIViewController {
-
+    
     @IBOutlet weak var mapView: MKMapView!
    
     @IBAction func changeMapType(_ sender: UISegmentedControl) {
@@ -24,7 +25,6 @@ class MapScreenViewController: UIViewController {
         
     }
     var tramsManager = TramsManager()
-
     
     let locationManager = CLLocationManager()
     let regionInMeters: Double = 10000
@@ -34,6 +34,7 @@ class MapScreenViewController: UIViewController {
         checkLocationServices()
         mapView.showsUserLocation = true
         tramsManager.performRequest(urlString: tramsManager.tramsURL)
+        //mapView.addAnnotations(arrayOfTramsLocation)
         
     }
     
@@ -57,6 +58,8 @@ class MapScreenViewController: UIViewController {
         if let location = locationManager.location?.coordinate {
             let region = MKCoordinateRegion.init(center: location, latitudinalMeters: regionInMeters, longitudinalMeters: regionInMeters)
             mapView.setRegion(region, animated: true)
+            mapView.addAnnotations(places)
+            
         }
     }
     
@@ -91,7 +94,7 @@ class MapScreenViewController: UIViewController {
 }
 
 //Conforming to Delegates
-extension MapScreenViewController: CLLocationManagerDelegate {
+extension MapScreenViewController: CLLocationManagerDelegate, MKMapViewDelegate {
     
     //Code to run when the location of the user changes
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -107,6 +110,23 @@ extension MapScreenViewController: CLLocationManagerDelegate {
     //Code to run when the authorization is being changed
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         checkLocationAuthorization()
+    }
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        
+        if annotation is MKUserLocation {
+            return nil
+        }
+        
+        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "TramsOnTheMap") as? MKMarkerAnnotationView
+        if annotationView == nil {
+            annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: "TramsOnTheMap")
+        } else {
+          annotationView?.annotation = annotation
+        }
+        annotationView?.glyphText = " 20 "
+        
+        return annotationView
     }
 }
 
