@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C52A5C8525FFA78000F02B47 /* TramsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52A5C8425FFA78000F02B47 /* TramsData.swift */; };
+		C55E66BA25FE91E0004082DB /* TramsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55E66B925FE91E0004082DB /* TramsManager.swift */; };
 		C5B8FCB925FCBBFA00FDA868 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B8FCB825FCBBFA00FDA868 /* AppDelegate.swift */; };
 		C5B8FCBB25FCBBFA00FDA868 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B8FCBA25FCBBFA00FDA868 /* SceneDelegate.swift */; };
 		C5B8FCBD25FCBBFA00FDA868 /* MapScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B8FCBC25FCBBFA00FDA868 /* MapScreen.swift */; };
@@ -16,6 +18,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C52A5C8425FFA78000F02B47 /* TramsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TramsData.swift; sourceTree = "<group>"; };
+		C55E66B925FE91E0004082DB /* TramsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TramsManager.swift; sourceTree = "<group>"; };
 		C5B8FCB525FCBBFA00FDA868 /* TramBye.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TramBye.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5B8FCB825FCBBFA00FDA868 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C5B8FCBA25FCBBFA00FDA868 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -37,6 +41,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C55E66BC25FE9CF3004082DB /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C55E66B925FE91E0004082DB /* TramsManager.swift */,
+				C52A5C8425FFA78000F02B47 /* TramsData.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		C55E66BD25FE9D04004082DB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C5B8FCBE25FCBBFA00FDA868 /* Main.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		C55E66BE25FE9D1F004082DB /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C5B8FCBC25FCBBFA00FDA868 /* MapScreen.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		C5B8FCAC25FCBBFA00FDA868 = {
 			isa = PBXGroup;
 			children = (
@@ -58,8 +87,9 @@
 			children = (
 				C5B8FCB825FCBBFA00FDA868 /* AppDelegate.swift */,
 				C5B8FCBA25FCBBFA00FDA868 /* SceneDelegate.swift */,
-				C5B8FCBC25FCBBFA00FDA868 /* MapScreen.swift */,
-				C5B8FCBE25FCBBFA00FDA868 /* Main.storyboard */,
+				C55E66BC25FE9CF3004082DB /* Model */,
+				C55E66BD25FE9D04004082DB /* View */,
+				C55E66BE25FE9D1F004082DB /* Controller */,
 				C5B8FCC125FCBBFE00FDA868 /* Assets.xcassets */,
 				C5B8FCC325FCBBFE00FDA868 /* LaunchScreen.storyboard */,
 				C5B8FCC625FCBBFE00FDA868 /* Info.plist */,
@@ -138,8 +168,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				C5B8FCBD25FCBBFA00FDA868 /* MapScreen.swift in Sources */,
+				C52A5C8525FFA78000F02B47 /* TramsData.swift in Sources */,
 				C5B8FCB925FCBBFA00FDA868 /* AppDelegate.swift in Sources */,
 				C5B8FCBB25FCBBFA00FDA868 /* SceneDelegate.swift in Sources */,
+				C55E66BA25FE91E0004082DB /* TramsManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

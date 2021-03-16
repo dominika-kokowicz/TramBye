@@ -23,6 +23,8 @@ class MapScreenViewController: UIViewController {
         }
         
     }
+    var tramsManager = TramsManager()
+
     
     let locationManager = CLLocationManager()
     let regionInMeters: Double = 10000
@@ -31,6 +33,8 @@ class MapScreenViewController: UIViewController {
         super.viewDidLoad()
         checkLocationServices()
         mapView.showsUserLocation = true
+        tramsManager.performRequest(urlString: tramsManager.tramsURL)
+        
     }
     
     func setupLocationManager() {
