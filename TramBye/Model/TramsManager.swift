@@ -8,7 +8,7 @@
 import Foundation
 
 struct TramsManager {
-    let tramsURL = "https://api.um.warszawa.pl/api/action/busestrams_get/?resource_id=%20f2e5503e-%20927d-4ad3-9500-4ab9e55deb59&apikey=1783a491-3959-4ee1-aa3d-66e9b8dcd44c&type=2&line=7"
+    let tramsURL = "https://api.um.warszawa.pl/api/action/busestrams_get/?resource_id=%20f2e5503e-%20927d-4ad3-9500-4ab9e55deb59&apikey=\(apiKeyTram)&type=2&line=7"
     
     func fetchTramLineLocation(tramLine: String) {
         let urlString = "\(tramsURL)=\(tramLine)#"
