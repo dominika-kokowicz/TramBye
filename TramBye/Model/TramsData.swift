@@ -9,6 +9,53 @@ import Foundation
 import CoreLocation
 import MapKit
 
+
+// NETWORKING
+
+struct WarsawAPITramDataDTO: Decodable {
+    
+    enum CodingKeys: String, CodingKey {
+        case lines = "Lines"
+        case lon = "Lon"
+        case lat = "Lat"
+    }
+    
+    let lines: String
+    let lon: Double
+    let lat: Double
+}
+
+struct WarsawApiRoot: Decodable {
+    let result: [WarsawAPITramDataDTO]
+}
+
+
+
+//
+// [API] <--> Interface <-->
+//
+
+// APP
+
+struct MapData {
+    let coordinate: CLLocationCoordinate2D
+    let title: String?
+}
+
+final class MapDataAnnotation: NSObject, MKAnnotation {
+    
+    let coordinate: CLLocationCoordinate2D
+    let title: String?
+    
+    init(mapData: MapData) {
+        coordinate = mapData.coordinate
+        title = mapData.title
+    }
+    
+}
+
+// ----
+
 struct Result: Decodable {
     let result: [TramsData]
     

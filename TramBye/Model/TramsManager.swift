@@ -9,6 +9,18 @@ import Foundation
 import CoreLocation
 import MapKit
 
+
+struct WarawAPI {
+    func getWarsawTramsData(_ completion: ([MapData]) -> Void) {
+        completion([])
+    }
+}
+
+
+
+
+
+
 struct TramsManager {
     let tramsURL = "https://api.um.warszawa.pl/api/action/busestrams_get/?resource_id=%20f2e5503e-%20927d-4ad3-9500-4ab9e55deb59&apikey=\(apiKeyTram)&type=2&line=20"
     
