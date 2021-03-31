@@ -9,14 +9,24 @@ import Foundation
 import CoreLocation
 import MapKit
 
-struct WarawAPI {
+struct WarsawAPI {
     private let tramsURL = "https://api.um.warszawa.pl/api/action/busestrams_get/?resource_id=%20f2e5503e-%20927d-4ad3-9500-4ab9e55deb59&apikey=\(apiKeyTram)&type=2&line=20"
-
+    
+    func generateURLsFromUserArray(userArray: [Int]) -> [String] {
+        for tramLine in userArray {
+            let tramsURL = "https://api.um.warszawa.pl/api/action/busestrams_get/?resource_id=%20f2e5503e-%20927d-4ad3-9500-4ab9e55deb59&apikey=\(apiKeyTram)&type=2&line=\(tramLine)"
+            urlsOfChosenTramLines.append(tramsURL)
+        }
+        print("Tablica URL: \(urlsOfChosenTramLines)")
+        return urlsOfChosenTramLines
+            
+    }
+    
     func getWarsawTramsData(_ completion: @escaping ([MapData]) -> Void) {
         URLSession.shared
             .dataTask(with: URLRequest(url: URL(string: tramsURL)! ) )  { (data, response, error) in
                 let decoder = JSONDecoder()
-                let root = try! decoder.decode(WarsawApiRootDTO.self, from: data!)
+                let root = try! decoder.decode(WarsawAPIRootDTO.self, from: data!)
                 
                 let mapped: [MapData] = root
                     .result
@@ -33,4 +43,5 @@ struct WarawAPI {
             }
             .resume()
     }
+    
 }

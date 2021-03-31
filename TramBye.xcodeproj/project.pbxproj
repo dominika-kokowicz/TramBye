@@ -10,12 +10,15 @@
 		C52A5C8525FFA78000F02B47 /* MapData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52A5C8425FFA78000F02B47 /* MapData.swift */; };
 		C52D4E0C260E50C4002183C7 /* APIkeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52D4E0B260E50C4002183C7 /* APIkeys.swift */; };
 		C52D4E10260E5529002183C7 /* TramLinesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52D4E0E260E5529002183C7 /* TramLinesViewController.swift */; };
-		C52D4E11260E5529002183C7 /* MapScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52D4E0F260E5529002183C7 /* MapScreenViewController.swift */; };
 		C52D4E15260E56B2002183C7 /* MapSceneViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52D4E14260E56B2002183C7 /* MapSceneViewModel.swift */; };
 		C52D4E1A260E5E5A002183C7 /* WarsawAPITramDataDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52D4E19260E5E5A002183C7 /* WarsawAPITramDataDTO.swift */; };
 		C52D4E1D260E5E83002183C7 /* WarsawAPIRootDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52D4E1C260E5E83002183C7 /* WarsawAPIRootDTO.swift */; };
 		C52D4E22260E5F74002183C7 /* MapDataAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52D4E21260E5F74002183C7 /* MapDataAnnotation.swift */; };
 		C52D4E25260E5FED002183C7 /* UserLocationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52D4E24260E5FED002183C7 /* UserLocationHandler.swift */; };
+		C54CAF7B261317FB00E7C52F /* TramLineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54CAF7A261317FB00E7C52F /* TramLineCell.swift */; };
+		C54CAF7F2613215200E7C52F /* MapScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54CAF7E2613215200E7C52F /* MapScreenViewController.swift */; };
+		C54CAF82261340C500E7C52F /* TramLinesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54CAF81261340C500E7C52F /* TramLinesViewModel.swift */; };
+		C54CAF862613508F00E7C52F /* GlobalVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54CAF852613508E00E7C52F /* GlobalVariables.swift */; };
 		C55E66BA25FE91E0004082DB /* WarsawAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55E66B925FE91E0004082DB /* WarsawAPI.swift */; };
 		C5B8FCB925FCBBFA00FDA868 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B8FCB825FCBBFA00FDA868 /* AppDelegate.swift */; };
 		C5B8FCBB25FCBBFA00FDA868 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B8FCBA25FCBBFA00FDA868 /* SceneDelegate.swift */; };
@@ -28,12 +31,15 @@
 		C52A5C8425FFA78000F02B47 /* MapData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapData.swift; sourceTree = "<group>"; };
 		C52D4E0B260E50C4002183C7 /* APIkeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIkeys.swift; sourceTree = "<group>"; };
 		C52D4E0E260E5529002183C7 /* TramLinesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TramLinesViewController.swift; sourceTree = "<group>"; };
-		C52D4E0F260E5529002183C7 /* MapScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapScreenViewController.swift; path = ../../../../../Documents/TramBye/TramBye/Controller/MapScreenViewController.swift; sourceTree = "<group>"; };
 		C52D4E14260E56B2002183C7 /* MapSceneViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapSceneViewModel.swift; sourceTree = "<group>"; };
 		C52D4E19260E5E5A002183C7 /* WarsawAPITramDataDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WarsawAPITramDataDTO.swift; sourceTree = "<group>"; };
 		C52D4E1C260E5E83002183C7 /* WarsawAPIRootDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WarsawAPIRootDTO.swift; sourceTree = "<group>"; };
 		C52D4E21260E5F74002183C7 /* MapDataAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapDataAnnotation.swift; sourceTree = "<group>"; };
 		C52D4E24260E5FED002183C7 /* UserLocationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLocationHandler.swift; sourceTree = "<group>"; };
+		C54CAF7A261317FB00E7C52F /* TramLineCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TramLineCell.swift; sourceTree = "<group>"; };
+		C54CAF7E2613215200E7C52F /* MapScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapScreenViewController.swift; sourceTree = "<group>"; };
+		C54CAF81261340C500E7C52F /* TramLinesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TramLinesViewModel.swift; sourceTree = "<group>"; };
+		C54CAF852613508E00E7C52F /* GlobalVariables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalVariables.swift; sourceTree = "<group>"; };
 		C55E66B925FE91E0004082DB /* WarsawAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WarsawAPI.swift; sourceTree = "<group>"; };
 		C5B8FCB525FCBBFA00FDA868 /* TramBye.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TramBye.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5B8FCB825FCBBFA00FDA868 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -76,6 +82,7 @@
 		C55E66BC25FE9CF3004082DB /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				C54CAF852613508E00E7C52F /* GlobalVariables.swift */,
 				C52A5C8425FFA78000F02B47 /* MapData.swift */,
 				C52D4E21260E5F74002183C7 /* MapDataAnnotation.swift */,
 				C52D4E24260E5FED002183C7 /* UserLocationHandler.swift */,
@@ -87,6 +94,7 @@
 			isa = PBXGroup;
 			children = (
 				C5B8FCBE25FCBBFA00FDA868 /* Main.storyboard */,
+				C54CAF7A261317FB00E7C52F /* TramLineCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -95,8 +103,9 @@
 			isa = PBXGroup;
 			children = (
 				C52D4E0E260E5529002183C7 /* TramLinesViewController.swift */,
+				C54CAF81261340C500E7C52F /* TramLinesViewModel.swift */,
 				C52D4E14260E56B2002183C7 /* MapSceneViewModel.swift */,
-				C52D4E0F260E5529002183C7 /* MapScreenViewController.swift */,
+				C54CAF7E2613215200E7C52F /* MapScreenViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -204,7 +213,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C52D4E11260E5529002183C7 /* MapScreenViewController.swift in Sources */,
+				C54CAF82261340C500E7C52F /* TramLinesViewModel.swift in Sources */,
 				C52D4E0C260E50C4002183C7 /* APIkeys.swift in Sources */,
 				C52D4E15260E56B2002183C7 /* MapSceneViewModel.swift in Sources */,
 				C52D4E1D260E5E83002183C7 /* WarsawAPIRootDTO.swift in Sources */,
@@ -213,9 +222,12 @@
 				C52A5C8525FFA78000F02B47 /* MapData.swift in Sources */,
 				C52D4E22260E5F74002183C7 /* MapDataAnnotation.swift in Sources */,
 				C5B8FCB925FCBBFA00FDA868 /* AppDelegate.swift in Sources */,
+				C54CAF862613508F00E7C52F /* GlobalVariables.swift in Sources */,
 				C5B8FCBB25FCBBFA00FDA868 /* SceneDelegate.swift in Sources */,
+				C54CAF7B261317FB00E7C52F /* TramLineCell.swift in Sources */,
 				C52D4E25260E5FED002183C7 /* UserLocationHandler.swift in Sources */,
 				C55E66BA25FE91E0004082DB /* WarsawAPI.swift in Sources */,
+				C54CAF7F2613215200E7C52F /* MapScreenViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

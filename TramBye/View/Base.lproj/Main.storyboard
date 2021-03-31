@@ -1,22 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="eNn-9e-9CX">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Map Screen View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="MapScreenViewController" customModule="TramBye" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="MapScreenViewController" customModule="TramBye" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="7PM-4t-IVE">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsTraffic="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7PM-4t-IVE">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <connections>
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="lZD-tX-Urx"/>
@@ -32,28 +33,134 @@
                                     <action selector="changeMapType:" destination="BYZ-38-t0r" eventType="valueChanged" id="Tuj-Qd-9CM"/>
                                 </connections>
                             </segmentedControl>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9kg-Fr-4lW" userLabel="chooseTramLinesButton">
+                                <rect key="frame" x="8" y="96" width="59" height="57"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" image="tram.circle.fill" catalog="system">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="50"/>
+                                </state>
+                                <connections>
+                                    <segue destination="VvQ-LH-bK1" kind="show" id="GMW-mj-Kda"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="7PM-4t-IVE" secondAttribute="trailing" id="9SQ-Hh-S8i"/>
+                            <constraint firstItem="9kg-Fr-4lW" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="8" id="XLt-4Z-luG"/>
                             <constraint firstItem="7PM-4t-IVE" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="YnA-X5-eCC"/>
                             <constraint firstItem="7PM-4t-IVE" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="aRg-5f-dyN"/>
                             <constraint firstAttribute="bottom" secondItem="7PM-4t-IVE" secondAttribute="bottom" id="fTA-GI-XPK"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="hC0-ga-g3V" secondAttribute="bottom" constant="20" id="h5S-8C-vrr"/>
+                            <constraint firstItem="9kg-Fr-4lW" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="mgd-ac-WJE"/>
                             <constraint firstItem="hC0-ga-g3V" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="pSP-EX-ghK"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="9kg-Fr-4lW" secondAttribute="trailing" priority="750" constant="200" id="pYU-sW-ZfI"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="ceI-wa-s8N"/>
                     <connections>
+                        <outlet property="chooseTramLinesButton" destination="9kg-Fr-4lW" id="0EY-zv-yHW"/>
                         <outlet property="mapView" destination="7PM-4t-IVE" id="ywf-zk-23Q"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="14" y="104"/>
+            <point key="canvasLocation" x="923.1884057971015" y="103.79464285714285"/>
+        </scene>
+        <!--Choose tram lines:-->
+        <scene sceneID="b1J-FE-FB4">
+            <objects>
+                <viewController title="Choose tram lines:" modalTransitionStyle="crossDissolve" id="VvQ-LH-bK1" customClass="TramLinesViewController" customModule="TramBye" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5dP-lQ-TyM">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="zyz-Ya-vVB">
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="MdY-Jz-OcO">
+                                    <size key="itemSize" width="60" height="60"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="10" minY="10" maxX="10" maxY="10"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="TramLineCell" id="xqI-Iq-pBN" customClass="TramLineCell" customModule="TramBye" customModuleProvider="target">
+                                        <rect key="frame" x="10" y="10" width="60" height="60"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="2uD-f0-oax">
+                                            <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DlP-sA-QFi" customClass="TramLinesView">
+                                                    <rect key="frame" x="3" y="13" width="54" height="34"/>
+                                                    <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <state key="normal" title="Button">
+                                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="tramLineCellButtonTapped:" destination="xqI-Iq-pBN" eventType="touchUpInside" id="2zF-Wr-Ygk"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="DlP-sA-QFi" firstAttribute="centerX" secondItem="2uD-f0-oax" secondAttribute="centerX" id="0jc-sw-91Y"/>
+                                                <constraint firstItem="DlP-sA-QFi" firstAttribute="centerY" secondItem="2uD-f0-oax" secondAttribute="centerY" id="RNg-NY-Vym"/>
+                                            </constraints>
+                                        </collectionViewCellContentView>
+                                        <connections>
+                                            <outlet property="tramLineCellButton" destination="DlP-sA-QFi" id="y3n-5g-75u"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="PoS-dm-SSQ"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" systemColor="labelColor"/>
+                        <constraints>
+                            <constraint firstItem="PoS-dm-SSQ" firstAttribute="bottom" secondItem="zyz-Ya-vVB" secondAttribute="bottom" id="CR8-nF-pcz"/>
+                            <constraint firstItem="PoS-dm-SSQ" firstAttribute="trailing" secondItem="zyz-Ya-vVB" secondAttribute="trailing" id="ao1-at-Brb"/>
+                            <constraint firstItem="zyz-Ya-vVB" firstAttribute="top" secondItem="PoS-dm-SSQ" secondAttribute="top" id="gkZ-c3-BPN"/>
+                            <constraint firstItem="zyz-Ya-vVB" firstAttribute="leading" secondItem="PoS-dm-SSQ" secondAttribute="leading" id="rlF-c2-1a5"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Choose tram lines:" id="Nn5-YL-Umk">
+                        <barButtonItem key="backBarButtonItem" title="Sop" id="pSo-IX-pld"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="tramLinesCollectionView" destination="zyz-Ya-vVB" id="g6b-1p-wdZ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2cK-vx-40N" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1860.8695652173915" y="103.79464285714285"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="3tE-ea-EXK">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="eNn-9e-9CX" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="myl-mT-JvZ">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="W6a-fO-pnr"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Mje-tH-OUQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="13.043478260869566" y="103.79464285714285"/>
         </scene>
     </scenes>
     <resources>
+        <image name="tram.circle.fill" catalog="system" width="128" height="121"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

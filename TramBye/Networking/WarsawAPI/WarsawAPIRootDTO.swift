@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct WarsawApiRootDTO: Decodable {
+struct WarsawAPIRootDTO: Decodable {
     let result: [WarsawAPITramDataDTO]
 }
