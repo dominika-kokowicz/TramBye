@@ -28,18 +28,9 @@ class TramLineCell: UICollectionViewCell {
     }
     
     @IBAction func tramLineCellButtonTapped(_ sender: UIButton) {
-        
         delegate?.didTapButton(with: title)
-
-        if !sender.isSelected {
-            sender.isSelected = true
-            self.contentView.backgroundColor = UIColor.yellow
-        }
-        else {
-            sender.isSelected = false
-            self.contentView.backgroundColor = UIColor.white
-        }
-    
+        sender.isSelected.toggle()
+        contentView.backgroundColor = sender.isSelected ? .yellow : .white
     }
    
 }
