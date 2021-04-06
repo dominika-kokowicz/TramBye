@@ -10,15 +10,14 @@ import CoreLocation
 import MapKit
 
 final class UserLocationHandler: NSObject, CLLocationManagerDelegate {
-    static var locationManager = CLLocationManager()
+    var locationManager = CLLocationManager()
     
     override init() {
-        UserLocationHandler.locationManager = CLLocationManager()
-        UserLocationHandler.locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager = CLLocationManager()
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
 
         super.init()
-
-        UserLocationHandler.locationManager.delegate = self
+        locationManager.delegate = self
     }
     
     enum AccessStatus {
@@ -35,11 +34,11 @@ final class UserLocationHandler: NSObject, CLLocationManagerDelegate {
     }
     
     func startUpdatingLocation() {
-        UserLocationHandler.locationManager.startUpdatingLocation()
+        locationManager.startUpdatingLocation()
     }
     
 private var checkLocationAuthorization: AccessStatus {
-        switch UserLocationHandler.locationManager.authorizationStatus {
+        switch locationManager.authorizationStatus {
         case .authorizedWhenInUse:
             return .granted
 
