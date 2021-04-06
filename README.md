@@ -17,4 +17,8 @@ I am currently working on a TramBye application, which purpose is to show the cu
 
 To get your own API key, please go to [https://api.um.warszawa.pl](https://api.um.warszawa.pl) to Logowanie tab and create a account.
 
-After you obtain API key add a file to your project for e.g. APIkeys.swift and create let constant called let apiKeyTram = "your_API_key"
+After you obtain API key add a file to your project for e.g. APIkeys.swift and create let constant:
+
+```swift
+let apiKeyTram = "your_API_key"
+```
