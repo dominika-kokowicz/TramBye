@@ -20,16 +20,12 @@ struct MapSceneViewModel {
   
     
     func viewDidLoad() {
-             
         handleUserLocation()
-        
     }
     
     func viewDidAppear() {
-        
         getTramsAnnotations()
-            
-        managedViewController?.fireTimer()
+        managedViewController?.setUpPublisher()
     }
     
     private func handleUserLocation() {
@@ -37,6 +33,7 @@ struct MapSceneViewModel {
         switch locationHandler.locationAccesStatus {
         case .granted:
             print("Granted fired")
+            //managedViewController?.isUserLocationVisible(isVisible: .case)
             managedViewController?.showUserLocation()
             centerViewOnUserLocation()
             locationHandler.startUpdatingLocation()
@@ -58,9 +55,9 @@ struct MapSceneViewModel {
     }
     
     func centerViewOnUserLocation() {
-        if let location = UserLocationHandler.locationManager.location?.coordinate {
+        if let location = locationHandler.locationManager.location?.coordinate {
             let region = MKCoordinateRegion.init(center: location, latitudinalMeters: regionInMeters, longitudinalMeters: regionInMeters)
-            managedViewController?.mapView.setRegion(region, animated: true)
+                managedViewController?.mapView.setRegion(region, animated: true)
         }
     }
         

@@ -7,11 +7,14 @@
 
 import UIKit
 import MapKit
+import Combine
 
 class MapScreenViewController: UIViewController {
     
     private var viewModel = MapSceneViewModel()
     private var userLocationHandler = UserLocationHandler()
+    private var store = [AnyCancellable]()
+    private let TramsOnTheMapIdentifier = "TramsOnTheMap"
     
     @IBOutlet weak var chooseTramLinesButton: UIButton!
     @IBOutlet weak var mapView: MKMapView!
@@ -35,7 +38,7 @@ class MapScreenViewController: UIViewController {
         
         viewModel.viewDidLoad()
         
-        _ = Timer.scheduledTimer(timeInterval: 11.0, target: self, selector: #selector(fireTimer), userInfo: nil, repeats: true)
+        //_ = Timer.scheduledTimer(timeInterval: 11.0, target: self, selector: #selector(fireTimer), userInfo: nil, repeats: true)
 
     }
     
@@ -61,37 +64,52 @@ class MapScreenViewController: UIViewController {
 
     }
     
-    @objc func fireTimer() {
-        viewModel.getTramsAnnotations()
-        print("Timer reseted")
-    }
+//    @objc func fireTimer() {
+//        viewModel.getTramsAnnotations()
+//        print("Timer reseted")
+//    }
 
 }
-
+extension MapScreenViewController {
+    func setUpPublisher() {
+        Timer.publish(every: 11.0, tolerance: 1.0, on: .main, in: .default, options: .none)
+            .autoconnect()
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                self!.viewModel.getTramsAnnotations()
+                print("Timer reseted")
+            }.store(in: &store)
+    }
+}
 extension MapScreenViewController {
     func showUserLocation() {
         print("🛤", #function, #line)
-        mapView.showsUserLocation = true
     }
     
     func hideUserLocation() {
         print("🛤", #function, #line)
-        mapView.showsUserLocation = false
     }
+    
+//    func isUserLocationVisible(isVisible: UserLocationStatus) {
+//        print("🛤", #function, #line)
+//        switch isVisible {
+//        case .visible:
+//            mapView.showsUserLocation = true
+//        case .hidden:
+//            mapView.showsUserLocation = false
+//        }
+//    }
     
     func displayAlertAskingForLocationPermission() {
         print("🛤", #function, #line)
-        UserLocationHandler.locationManager.requestWhenInUseAuthorization()
+        
+        userLocationHandler.locationManager.requestWhenInUseAuthorization()
     }
     
     func refreshAnnotation(_ annotations: [MapDataAnnotation]) {
         print("🛤", #function, #line, annotations)
         
-        self.mapView.annotations.forEach {
-               if !($0 is MKUserLocation) {
-                 self.mapView.removeAnnotation($0)
-               }
-             }
+        mapView.removeAnnotations(mapView.annotations.filter { $0 !== mapView.userLocation })
 
         mapView.addAnnotations(annotations)
     }
@@ -101,15 +119,13 @@ extension MapScreenViewController: MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
 
-        if annotation is MKUserLocation {
-            return nil
-        }
+        guard annotation as? MKUserLocation != mapView.userLocation else { return nil }
         
-        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "TramsOnTheMap") as? MKMarkerAnnotationView
+        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: TramsOnTheMapIdentifier) as? MKMarkerAnnotationView
         if annotationView == nil {
-            annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: "TramsOnTheMap")
+            annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: TramsOnTheMapIdentifier)
         } else {
-          annotationView?.annotation = annotation
+            annotationView?.annotation = annotation
         }
        
         annotationView?.glyphText = annotation.title as? String
