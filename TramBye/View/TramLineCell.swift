@@ -7,30 +7,27 @@
 
 import UIKit
 
-protocol TramsCollectionViewCellDelegate: AnyObject {
-    func didTapButton(with title: String)
-}
 
 class TramLineCell: UICollectionViewCell {
     static let reuseIdentifier = String(describing: TramLineCell.self)
-    private var title: String = ""
-    weak var delegate: TramsCollectionViewCellDelegate?
     
-    @IBOutlet weak var tramLineCellButton: UIButton!
+    @IBOutlet weak var tramLineLabel: UILabel!
     
-    func configure(with title: String) {
+    override var isSelected: Bool {
+        didSet {
+            backgroundColor = isSelected ? .yellow : .white
+        }
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        
         self.layer.cornerRadius = 10.0
         self.layer.borderWidth = 3
         self.layer.borderColor = UIColor.darkGray.cgColor
-        self.title = title
-        tramLineCellButton.setTitle(title, for: .normal)
-    
     }
     
-    @IBAction func tramLineCellButtonTapped(_ sender: UIButton) {
-        delegate?.didTapButton(with: title)
-        sender.isSelected.toggle()
-        contentView.backgroundColor = sender.isSelected ? .yellow : .white
+    func configure(with title: String) {        
+        tramLineLabel.text = title
     }
-   
 }

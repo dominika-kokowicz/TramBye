@@ -6,17 +6,29 @@
 //
 
 import Foundation
+import UIKit
 
 struct TramLinesViewModel {
+    
     private var viewModel = MapSceneViewModel()
-    private let warsawAPI = WarsawAPI()
+    private let repository = TramDataRepository.shared
     
     weak var managedViewController: TramLinesViewController?
 
-    let tramLines = [1,2,3,4,6,7,9,10,11,13,14,15,17,18,20,22,23,24,25,26,27,28,31,33,35,41]
+    var tramLines: [Int] {
+        repository.allSeenLines.sorted()
+    }
     
-    func viewWillDisappear() {
-        warsawAPI.generateURLsFromUserArray(userArray: Array(chosenTramLinesToTrack))
+    func didSelect(line: String) {
+        repository.addSelected(line: line)
+    }
+    
+    func didDeselect(line: String) {
+        repository.removeSelected(line: line)
+    }
+    
+    func isLineSelected(_ line: String) -> Bool {
+        repository.selectedLines.contains(line)
     }
     
 }

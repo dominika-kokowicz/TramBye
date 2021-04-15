@@ -17,14 +17,9 @@ class TramLinesViewController: UIViewController, UICollectionViewDelegate, UICol
         super.viewDidLoad()
         tramLinesCollectionView.delegate = self
         tramLinesCollectionView.dataSource = self
+        tramLinesCollectionView.allowsMultipleSelection = true
        
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: nil, action: nil)
-        
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        viewModel.viewWillDisappear()
     }
 
 }
@@ -37,13 +32,34 @@ extension TramLinesViewController {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TramLineCell.reuseIdentifier, for: indexPath) as! TramLineCell
-        cell.tramLineCellButton.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
-        cell.configure(with: "\(viewModel.tramLines[indexPath.row])")
-        cell.tramLineCellButton.tag = viewModel.tramLines[indexPath.row]
-           return cell
-       }
+        
+        let line = "\(viewModel.tramLines[indexPath.row])"
+        cell.configure(with: line)
+        
+        viewModel.isLineSelected( line )
+            ? collectionView.selectItem(at: indexPath, animated: true, scrollPosition: [])
+            : collectionView.deselectItem(at: indexPath, animated: true)
+        
+        cell.isSelected = viewModel.isLineSelected( line )
+        
+        return cell
+    }
     
- 
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath) as! TramLineCell
+        
+        cell.tramLineLabel.text
+            .map { (selectedLine: String) in
+                viewModel.didSelect(line: selectedLine)
+            }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath) as! TramLineCell
+        
+        cell.tramLineLabel.text
+            .map { (selectedLine: String) in
+                viewModel.didDeselect(line: selectedLine)
+            }
+    }
 }
-
-

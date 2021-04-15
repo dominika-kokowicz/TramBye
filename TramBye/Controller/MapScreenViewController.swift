@@ -17,28 +17,20 @@ class MapScreenViewController: UIViewController {
     private let TramsOnTheMapIdentifier = "TramsOnTheMap"
     
     @IBOutlet weak var chooseTramLinesButton: UIButton!
-    @IBOutlet weak var mapView: MKMapView!
-   
-    @IBAction func changeMapType(_ sender: UISegmentedControl) {
-        
-        if sender.selectedSegmentIndex == 0 {
-            mapView.mapType = .standard
-            chooseTramLinesButton.tintColor = .black
-        } else {
-            mapView.mapType = .satellite
-            chooseTramLinesButton.tintColor = .white
+    @IBOutlet weak var mapView: MKMapView! {
+        didSet {
+            mapView.showsTraffic = true
         }
-        
     }
+   
     
+// MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         viewModel.managedViewController = self
         
         viewModel.viewDidLoad()
-        
-        //_ = Timer.scheduledTimer(timeInterval: 11.0, target: self, selector: #selector(fireTimer), userInfo: nil, repeats: true)
 
     }
     
@@ -53,23 +45,33 @@ class MapScreenViewController: UIViewController {
         super.viewWillAppear(animated)
         
         navigationController?.setNavigationBarHidden(true, animated: animated)
-
     }
 
     override func viewWillDisappear(_ animated: Bool) {
-
         super.viewWillDisappear(animated)
         
         navigationController?.setNavigationBarHidden(false, animated: animated)
-
     }
-    
-//    @objc func fireTimer() {
-//        viewModel.getTramsAnnotations()
-//        print("Timer reseted")
-//    }
-
 }
+// MARK: - User Interaction
+
+extension MapScreenViewController {
+    
+     @IBAction func changeMapType(_ sender: UISegmentedControl) {
+         
+         if sender.selectedSegmentIndex == 0 {
+             mapView.mapType = .standard
+             chooseTramLinesButton.tintColor = .black
+         } else {
+             mapView.mapType = .satellite
+             chooseTramLinesButton.tintColor = .white
+         }
+         
+     }
+}
+
+// MARK: - Timer
+
 extension MapScreenViewController {
     func setUpPublisher() {
         Timer.publish(every: 11.0, tolerance: 1.0, on: .main, in: .default, options: .none)
@@ -81,24 +83,21 @@ extension MapScreenViewController {
             }.store(in: &store)
     }
 }
+
+// MARK: - User Location
+
 extension MapScreenViewController {
-    func showUserLocation() {
-        print("🛤", #function, #line)
+    
+    enum UserLocationStatus {
+        case visible, hidden
+        
+        var isVisible: Bool { self == .visible }
     }
     
-    func hideUserLocation() {
-        print("🛤", #function, #line)
+    func setUserLocation(status: UserLocationStatus) {
+        mapView.showsUserLocation = status.isVisible
     }
     
-//    func isUserLocationVisible(isVisible: UserLocationStatus) {
-//        print("🛤", #function, #line)
-//        switch isVisible {
-//        case .visible:
-//            mapView.showsUserLocation = true
-//        case .hidden:
-//            mapView.showsUserLocation = false
-//        }
-//    }
     
     func displayAlertAskingForLocationPermission() {
         print("🛤", #function, #line)
@@ -107,8 +106,6 @@ extension MapScreenViewController {
     }
     
     func refreshAnnotation(_ annotations: [MapDataAnnotation]) {
-        print("🛤", #function, #line, annotations)
-        
         mapView.removeAnnotations(mapView.annotations.filter { $0 !== mapView.userLocation })
 
         mapView.addAnnotations(annotations)
@@ -134,13 +131,3 @@ extension MapScreenViewController: MKMapViewDelegate {
     }
    
 }
-
-
-//        for url in chosenTramLinesArray {
-//            let result = tramsManager.fetchTramLineLocation2(tramLine: url)
-//            urlsOfChosenTramLines.append(result)
-//
-//        }
-//        for urls in urlsOfChosenTramLines {
-//            tramsManager.performRequest(urlString: urls)
-//        }
