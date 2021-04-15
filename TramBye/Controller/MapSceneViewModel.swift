@@ -8,17 +8,26 @@
 import UIKit
 import MapKit
 
+// TODO: move to file
+protocol TramDataProvider {
+    var selectedLines: Set<String> { get }
+    func getWarsawTramsData(_ completion: @escaping ([MapData]) -> Void)
+}
+
 struct MapSceneViewModel {
     
     weak var managedViewController: MapScreenViewController?
     
     let defaults = UserDefaults.standard
     let regionInMeters: Double = 10_000
+    let dataProvider: TramDataProvider
     
-    private let warsawApi = WarsawAPI()
     private let locationHandler = UserLocationHandler()
-  
     
+    init(dataProvider: TramDataProvider = TramDataRepository.shared) {
+        self.dataProvider = dataProvider
+    }
+  
     func viewDidLoad() {
         handleUserLocation()
     }
@@ -34,22 +43,22 @@ struct MapSceneViewModel {
         case .granted:
             print("Granted fired")
             //managedViewController?.isUserLocationVisible(isVisible: .case)
-            managedViewController?.showUserLocation()
+            managedViewController?.setUserLocation(status: .visible)
             centerViewOnUserLocation()
             locationHandler.startUpdatingLocation()
             
         case .notDetermined:
             print("Not determined fired")
-            managedViewController?.hideUserLocation()
+            managedViewController?.setUserLocation(status: .hidden)
             managedViewController?.displayAlertAskingForLocationPermission()
 
         case .denied:
             print("Denied fired")
-            managedViewController?.hideUserLocation()
+            managedViewController?.setUserLocation(status: .hidden)
 
         case .disabled:
             print("Disabled fired")
-            managedViewController?.hideUserLocation()
+            managedViewController?.setUserLocation(status: .hidden)
 
         }
     }
@@ -66,15 +75,17 @@ struct MapSceneViewModel {
     }
     
      func getTramsAnnotations() {
-        warsawApi
+        dataProvider
             .getWarsawTramsData { (mapData: [MapData]) in
-                let maped = mapData.map { datum in MapDataAnnotation(mapData: datum) }
+                let maped = mapData
+                    .filter{ (datum: MapData) -> Bool in
+                        datum.title.map( dataProvider.selectedLines.contains )
+                        ?? false
+                    }
+                    .map { datum in MapDataAnnotation(mapData: datum) }
                 managedViewController?.refreshAnnotation(maped)
-                managedViewController?.showUserLocation()
+                managedViewController?.setUserLocation(status: .visible)
             }
     }
-    
-    
-
 }
 
