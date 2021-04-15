@@ -8,12 +8,6 @@
 import UIKit
 import MapKit
 
-// TODO: move to file
-protocol TramDataProvider {
-    var selectedLines: Set<String> { get }
-    func getWarsawTramsData(_ completion: @escaping ([MapData]) -> Void)
-}
-
 struct MapSceneViewModel {
     
     weak var managedViewController: MapScreenViewController?
@@ -42,7 +36,6 @@ struct MapSceneViewModel {
         switch locationHandler.locationAccesStatus {
         case .granted:
             print("Granted fired")
-            //managedViewController?.isUserLocationVisible(isVisible: .case)
             managedViewController?.setUserLocation(status: .visible)
             centerViewOnUserLocation()
             locationHandler.startUpdatingLocation()
